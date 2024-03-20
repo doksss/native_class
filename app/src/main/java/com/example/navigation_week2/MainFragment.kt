@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.navigation.Navigation
 import com.example.navigation_week2.databinding.FragmentMainBinding
 
@@ -12,6 +13,7 @@ import com.example.navigation_week2.databinding.FragmentMainBinding
 class MainFragment : Fragment() {
 
     private lateinit var binding:FragmentMainBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,6 +27,12 @@ class MainFragment : Fragment() {
     //tempat mengakses layout/ui (seperti tombol dll)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //ini liat asal panahnya dari mana untuk paggil MainFragmentDirections, terus panggil nama panahnya
+        binding.btnSetting.setOnClickListener{
+            val action = MainFragmentDirections.actionOptionFragment()
+            Navigation.findNavController(it).navigate(action)
+        }
         binding.btnStart.setOnClickListener{
             //MainFragmentDirection class otomatis dibuat android studio
             var namePlayer = binding.txtName.text.toString()
